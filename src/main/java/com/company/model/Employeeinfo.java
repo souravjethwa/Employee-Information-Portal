@@ -2,16 +2,15 @@ package com.company.model;
 
 import org.springframework.stereotype.Component;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Component
 @Entity
 public class Employeeinfo {
 
     @Id
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE , generator = "empSeq")
+//    @SequenceGenerator(name = "empSeq", sequenceName = "empSeq", initialValue = 1, allocationSize = 1)
     @GeneratedValue
     @Column(name = "emp_id")
     private int empId;
