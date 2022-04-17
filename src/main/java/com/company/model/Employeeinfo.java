@@ -19,6 +19,9 @@ public class Employeeinfo {
     @Column(name = "emp_salary")
     private int empSalary;
 
+    @ManyToOne
+    private Department department;
+
     public Employeeinfo(){}
 
     public Employeeinfo(int empId, String empName, int empSalary){
@@ -49,6 +52,14 @@ public class Employeeinfo {
 
     public void setEmpSalary(int empSalary) {
         this.empSalary = empSalary;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 
     @Override

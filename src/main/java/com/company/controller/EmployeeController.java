@@ -2,7 +2,9 @@ package com.company.controller;
 
 import com.company.model.Employeeinfo;
 import com.company.repository.EmployeeRepository;
+import com.company.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -16,6 +18,8 @@ public class EmployeeController {
     private  Employeeinfo employeeinfo;
     @Autowired
     private EmployeeRepository employeeRepository;
+    @Autowired
+    private EmployeeService employeeService;
 
     @GetMapping(value = "/all")
     public List<Employeeinfo> getInfoForAll(){
@@ -36,8 +40,13 @@ public class EmployeeController {
     }
 
     @PostMapping(value = "/add")
-    public void addNewEmployeeInfo(@RequestBody Employeeinfo employeeinfo){
-        employeeRepository.save(employeeinfo);
+    public void addNewEmployeeInfo(@RequestBody Employeeinfo employeeinfo, @RequestParam int deptId){
+        employeeService.addNewEmployeeInfo(employeeinfo, deptId);
+    }
+
+    @PutMapping(value = "/updateDepartForEmp/{empId}/{deptId}")
+    public void updateDepartmentForEmployee(@PathVariable int empId, @PathVariable int deptId){
+        employeeService.updateDepartmentForEmployee(empId, deptId);
     }
 
     @DeleteMapping(value = "/delete/{id}")
