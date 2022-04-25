@@ -1,7 +1,7 @@
 package com.company.controller;
 
 import com.company.model.Department;
-import com.company.repository.DepartmentRepository;
+import com.company.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,17 +13,17 @@ public class DepartmentController {
 
     @Autowired
     private Department department;
+
     @Autowired
-    private DepartmentRepository departmentRepository;
+    private DepartmentService departmentService;
 
     @GetMapping(value = "/all")
     public List<Department> getInfoForAll(){
-        List<Department> list = departmentRepository.findAll();
-        return list;
+        return this.departmentService.getInfoForAll();
     }
 
     @PostMapping(value = "/add")
     public void addDepartmentInfo(@RequestBody Department department){
-        departmentRepository.save(department);
+        departmentService.addDepartmentInfo(department);
     }
 }

@@ -17,40 +17,35 @@ public class EmployeeController {
     @Autowired
     private  Employeeinfo employeeinfo;
     @Autowired
-    private EmployeeRepository employeeRepository;
-    @Autowired
     private EmployeeService employeeService;
 
     @GetMapping(value = "/all")
     public List<Employeeinfo> getInfoForAll(){
-        List<Employeeinfo> l= employeeRepository.findAll();
-        return l;
+        return this.employeeService.getInfoForAll();
     }
+
     @GetMapping(value = "/{id}")
     public Employeeinfo getInfoById(@PathVariable int id){
-         employeeinfo = employeeRepository.findById(id);
-         return employeeinfo;
+        return this.employeeService.getInfoById(id);
     }
 
     @PutMapping(value = "/update/{id}")
-    public void updateInfoUsingId(@PathVariable int id){
-        employeeinfo = employeeRepository.findById(id);
-        employeeinfo.setEmpSalary(5000);
-        employeeRepository.save(employeeinfo);
+    public void updateEmployeeSalaryUsingId(@PathVariable int id){
+        this.employeeService.updateEmployeeSalaryUsingId(id);
     }
 
     @PostMapping(value = "/add")
     public void addNewEmployeeInfo(@RequestBody Employeeinfo employeeinfo, @RequestParam int deptId){
-        employeeService.addNewEmployeeInfo(employeeinfo, deptId);
+        this.employeeService.addNewEmployeeInfo(employeeinfo, deptId);
     }
 
     @PutMapping(value = "/updateDepartForEmp/{empId}/{deptId}")
     public void updateDepartmentForEmployee(@PathVariable int empId, @PathVariable int deptId){
-        employeeService.updateDepartmentForEmployee(empId, deptId);
+        this.employeeService.updateDepartmentForEmployee(empId, deptId);
     }
 
     @DeleteMapping(value = "/delete/{id}")
     public void deleteInfoById(@PathVariable int id){
-        employeeRepository.deleteById(id);
+        this.employeeService.deleteInfoById(id);
     }
 }
