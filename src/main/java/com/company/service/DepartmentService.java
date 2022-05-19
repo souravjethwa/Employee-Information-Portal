@@ -1,5 +1,6 @@
 package com.company.service;
 
+import com.company.exception.DepartmentNotFoundException;
 import com.company.model.Department;
 import com.company.repository.DepartmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,9 @@ public class DepartmentService {
 
     public List<Department> getInfoForAll(){
         List<Department> list = departmentRepository.findAll();
+        if(list.isEmpty()){
+            throw new DepartmentNotFoundException("No Department data found");
+        }
         return list;
     }
 
